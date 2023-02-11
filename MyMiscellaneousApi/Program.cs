@@ -11,11 +11,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseStaticFiles();
-
-app.MapGet("/", () =>
+app.UseStaticFiles(new StaticFileOptions
 {
-    return Results.Redirect("/index.html");
+    ServeUnknownFileTypes = true,
 });
+
+app.MapGet("/", () => Results.Redirect("/index.html"));
 
 app.Run();
