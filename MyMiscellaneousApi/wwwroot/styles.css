@@ -1,0 +1,6 @@
+.btn:hover {
+  transition: background-color 2s ease-out;
+  transition: border-color 2s ease-out;
+  background: red;
+  border-color: red;
+}
