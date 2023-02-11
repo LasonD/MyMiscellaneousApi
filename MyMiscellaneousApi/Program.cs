@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -17,5 +19,6 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.MapGet("/", () => Results.Redirect("/index.html"));
+app.MapGet("/random", ([FromQuery] int min, [FromQuery] int max) => Results.Ok(new Random().Next(min, max <= min ? 10_000 : max)));
 
 app.Run();
