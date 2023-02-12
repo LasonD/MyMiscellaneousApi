@@ -1,3 +1,5 @@
+import { getRandomColor } from "../Utils/scripts.js";
+
 const KAPPA = (4 * (Math.sqrt(2) - 1)) / 3;
 const WIDTH_FACTOR = 0.0333;
 const HEIGHT_FACTOR = 0.4;
@@ -14,8 +16,8 @@ export class Baloon {
     this.centerY = centerY;
     this.radius = radius;
     this.baseColor = color;
-    this.darkColor = color;
-    this.lightColor = color;
+    this.darkColor = getRandomColor();
+    this.lightColor = getRandomColor();
   }
 
   draw() {

@@ -23,18 +23,17 @@ const words = [
 let interval = 500;
 
 const drawGreeting = function () {
-  const { x, y } = getRandomCoordinate(canvas);
-
+  const baloonCoords = getRandomCoordinate(canvas);
   const baloonColor = getRandomColor();
   const baloonRadius = getRandomInt(5, 100);
-  const baloon = new Baloon(context, x, y, baloonRadius, baloonColor);
-
+  const baloon = new Baloon(context, baloonCoords.x, baloonCoords.y, baloonRadius, baloonColor);
   baloon.draw();
 
+  const greetCoords = getRandomCoordinate(canvas);
   const greeting = getRandomArrayElement(words);
-  context.fillText(greeting, x, y);
+  context.fillText(greeting, greetCoords.x, greetCoords.y);
 
-  interval--;
+  interval -= 10;
 
   setTimeout(drawGreeting, interval);
 };
