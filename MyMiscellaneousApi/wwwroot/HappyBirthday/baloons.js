@@ -14,13 +14,28 @@ export class Baloon {
     this.gfxContext = context;
     this.centerX = centerX;
     this.centerY = centerY;
+    this.xV = 0;
+    this.yV = radius * (-0.05);
     this.radius = radius;
     this.baseColor = color;
     this.darkColor = getRandomColor();
     this.lightColor = getRandomColor();
   }
 
+  isVisible() {
+    const heightDiff = this.radius * HEIGHT_FACTOR;
+    const balloonBottomY = this.centerY + this.radius + heightDiff;
+    return balloonBottomY >= 0;
+  }
+
+  updatePosition() {
+    this.centerX = this.centerX + this.xV;
+    this.centerY = this.centerY + this.yV;
+  }
+
   draw() {
+    this.updatePosition();
+
     const gfxContext = this.gfxContext;
     const radius = this.radius;
     const centerX = this.centerX;

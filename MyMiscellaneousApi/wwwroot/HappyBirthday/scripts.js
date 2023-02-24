@@ -2,10 +2,10 @@ import {
   getRandomCoordinate,
   getRandomArrayElement,
   getRandomColor,
-  getRandomInt
+  getRandomInt,
 } from "../Utils/scripts.js";
 
-import { Baloon } from "./baloons.js"; 
+import { Baloon } from "./baloons.js";
 
 const canvas = document.getElementById("happyCanvas");
 const context = canvas.getContext("2d");
@@ -20,22 +20,71 @@ const words = [
   "Всього найкращого!",
 ];
 
-let interval = 500;
+const baloons = [];
 
-const drawGreeting = function () {
-  const baloonCoords = getRandomCoordinate(canvas);
+for (let i = 0; i < 10; i++) {
+  baloons.push(generateRandomBaloon());
+}
+
+function generateRandomBaloon() {
   const baloonColor = getRandomColor();
   const baloonRadius = getRandomInt(5, 100);
-  const baloon = new Baloon(context, baloonCoords.x, baloonCoords.y, baloonRadius, baloonColor);
-  baloon.draw();
+  const x = getRandomInt(0, canvas.width);
+  const y = canvas.height + baloonRadius;
 
-  const greetCoords = getRandomCoordinate(canvas);
-  const greeting = getRandomArrayElement(words);
-  context.fillText(greeting, greetCoords.x, greetCoords.y);
+  return new Baloon(context, x, y, baloonRadius, baloonColor);
+}
 
-  interval -= 10;
+function update() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-  setTimeout(drawGreeting, interval);
-};
+  for (let index = 0; index < baloons.length; index++) {
+    let baloon = baloons[index];
+    if (!baloon.isVisible()) {
+      baloons.splice(index, 1);
+    }
 
-setTimeout(drawGreeting, interval);
+    baloon.draw();
+  }
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  update();
+}
+
+animate();
+
+let clicksCount = 0;
+
+document.addEventListener("click", () => {
+  clicksCount++;
+
+  const baloon = generateRandomBaloon();
+  baloons.push(baloon);
+
+  if (clicksCount % 10 === 0) {
+    for (let i = 0; i < clicksCount; i++) {
+      const baloon = generateRandomBaloon();
+      baloons.push(baloon);
+    }
+  }
+});
+
+// const drawGreeting = function () {
+//   const baloonCoords = getRandomCoordinate(canvas);
+//   const baloonColor = getRandomColor();
+//   const baloonRadius = getRandomInt(5, 100);
+//   const baloon = new Baloon(context, baloonCoords.x, baloonCoords.y, baloonRadius, baloonColor);
+//   baloon.draw();
+
+//   const greetCoords = getRandomCoordinate(canvas);
+//   const greeting = getRandomArrayElement(words);
+//   context.fillText(greeting, greetCoords.x, greetCoords.y);
+
+//   interval -= 10;
+
+//   setTimeout(drawGreeting, interval);
+// };
+
+// setTimeout(drawGreeting, interval);
