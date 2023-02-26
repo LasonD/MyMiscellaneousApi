@@ -21,9 +21,7 @@ canvas.addEventListener("mousedown", (e) => {
   isMouseDown = true;
 });
 
-connection.on("paintAt", (point) => {
-  console.log(point);
-
+connection.on("paintAt", (point { x: number, y: number }) => {
   const { x, y } = point;
 
   ctx.beginPath();
