@@ -1,9 +1,11 @@
+import * as signalR from "@microsoft/signalr";
+
 const connection = new signalR.HubConnectionBuilder()
   .withUrl("/hubs/painting")
   .build();
 
-const canvas = document.getElementById("paintingCanvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById("paintingCanvas") as HTMLCanvasElement;
+const ctx = canvas.getContext("2d")!;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;

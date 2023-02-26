@@ -1,23 +1,25 @@
-import { getRandomInt } from "../../Utils/scripts.js";
+import { getRandomInt } from "../../Utils/scripts";
 
-const canvas = document.getElementById("playGround");
-const context = canvas.getContext("2d");
+const canvas = document.getElementById("playGround") as HTMLCanvasElement;
+const context = canvas.getContext("2d")!;
 const gravity = 0.5;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 class Entity {
-  constructor(canvas, x, y, width, height, color) {
-    this.canvas = canvas;
-    this.context = canvas.getContext("2d");
-    this.x = x;
-    this.y = y;
-    this.xV = 0;
-    this.yV = 0;
-    this.width = width;
-    this.height = height;
-    this.color = color;
+  protected context: CanvasRenderingContext2D;
+  public xV: number = 0;
+  public yV: number = 0;
+
+  constructor(
+    public canvas: HTMLCanvasElement, 
+    public x: number, 
+    public y: number, 
+    public width: number, 
+    public height: number, 
+    public color: string) {
+    this.context = canvas.getContext("2d")!;
   }
 
   draw() {
@@ -47,9 +49,9 @@ class Player extends Entity {
     },
   };
   isCollided = false;
-  platforms = [];
+  platforms: Platform[] = [];
 
-  constructor(canvas) {
+  constructor(canvas: HTMLCanvasElement) {
     super(canvas, 500, 30, 30, 30, "red");
 
     window.addEventListener("keydown", (e) => {
@@ -83,7 +85,7 @@ class Player extends Entity {
   }
 
   checkCollision() {
-    this.platforms.forEach((platform) => {
+    this.platforms.forEach((platform: Platform) => {
       const playerBottomY = this.y + this.height;
       const playerEndX = this.x + this.width;
       const platformEndX = platform.x + platform.width;
@@ -114,7 +116,7 @@ class Player extends Entity {
   }
 
   updatePlatforms() {
-    this.platforms.forEach((p) => p.update());
+    this.platforms.forEach((p: Platform) => p.update());
   }
 
   updateYVelocity() {
@@ -148,8 +150,8 @@ class Player extends Entity {
       change = 1;
     }
 
-    if (this.platforms.some((p) => p.xV !== 0)) {
-      this.platforms.forEach((p) => (p.xV += -change));
+    if (this.platforms.some((p: Platform) => p.xV !== 0)) {
+      this.platforms.forEach((p: Platform) => (p.xV += -change));
     } else {
       this.xV += change;
     }
@@ -157,15 +159,14 @@ class Player extends Entity {
     this.floorXVelocity();
   }
 
-  updatePlatformsVelocity(x) {
-    this.platforms.forEach((platform) => (platform.xV += x));
+  updatePlatformsVelocity(x: number) {
+    this.platforms.forEach((platform: Platform) => (platform.xV += x));
   }
 }
 
 class Platform extends Entity {
-  constructor(player, canvas, x, y) {
+  constructor(protected player: Player, canvas: HTMLCanvasElement, x: number, y: number) {
     super(canvas, x, y, getRandomInt(20, 500), 10, "black");
-    this.player = player;
   }
 
   draw() {
@@ -247,5 +248,5 @@ function showMessage() {
   const currentNotification =
     possibleNotifications[getRandomInt(0, possibleNotifications.length)];
 
-  notificationsBar.innerText = currentNotification;
+  notificationsBar!.innerText = currentNotification;
 }

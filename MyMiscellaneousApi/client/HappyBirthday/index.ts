@@ -3,12 +3,12 @@ import {
   getRandomArrayElement,
   getRandomColor,
   getRandomInt,
-} from "../Utils/scripts.js";
+} from "../Utils/scripts";
 
-import { Baloon } from "./baloons.js";
+import { Baloon } from "./baloons";
 
-const canvas = document.getElementById("happyCanvas");
-const context = canvas.getContext("2d");
+const canvas = document.getElementById("happyCanvas") as HTMLCanvasElement;
+const context = canvas.getContext("2d")!;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -20,7 +20,7 @@ const words = [
   "Всього найкращого!",
 ];
 
-const baloons = [];
+const baloons: Baloon[] = [];
 
 for (let i = 0; i < 10; i++) {
   baloons.push(generateRandomBaloon());

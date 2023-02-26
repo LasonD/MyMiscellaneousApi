@@ -7,6 +7,7 @@
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./client/index.ts":
@@ -15,7 +16,7 @@
   \*************************/
 /***/ (() => {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/ts-loader/index.js):\\nError: \\u001b[31merror while parsing tsconfig.json\\u001b[39m\\n    at Object.loader (D:\\\\Repos\\\\MyMiscellaneousApi\\\\MyMiscellaneousApi\\\\node_modules\\\\ts-loader\\\\dist\\\\index.js:17:18)\");\n\n//# sourceURL=webpack://mymiscellaneousapi/./client/index.ts?");
+eval("\r\nhandleRedSquareBtn();\r\nfunction handleRedSquareBtn() {\r\n    const btnRedSquare = document.getElementById(\"btnRedSquare\");\r\n    const originalContent = btnRedSquare.innerText;\r\n    btnRedSquare.addEventListener(\"mouseover\", (e) => {\r\n        btnRedSquare.innerText = 'Тисни вже!';\r\n    });\r\n    btnRedSquare.addEventListener(\"mouseout\", (e) => {\r\n        btnRedSquare.innerText = originalContent;\r\n    });\r\n}\r\n\n\n//# sourceURL=webpack://mymiscellaneousapi/./client/index.ts?");
 
 /***/ })
 
@@ -24,7 +25,7 @@ eval("throw new Error(\"Module build failed (from ./node_modules/ts-loader/index
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = {};
 /******/ 	__webpack_modules__["./client/index.ts"]();
 /******/ 	

@@ -1,4 +1,4 @@
-import { getRandomColor } from "../Utils/scripts.js";
+import { getRandomColor } from "../Utils/scripts";
 
 const KAPPA = (4 * (Math.sqrt(2) - 1)) / 3;
 const WIDTH_FACTOR = 0.0333;
@@ -10,7 +10,17 @@ const GRADIENT_FACTOR = 0.3;
 const GRADIENT_CIRCLE_RADIUS = 3;
 
 export class Baloon {
-  constructor(context, centerX, centerY, radius, color) {
+  gfxContext: CanvasRenderingContext2D;
+  centerX: number;
+  centerY: number;
+  xV: number;
+  yV: number;
+  radius: number;
+  baseColor: string;
+  darkColor: string;
+  lightColor: string;
+  
+  constructor(context: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number, color: string) {
     this.gfxContext = context;
     this.centerX = centerX;
     this.centerY = centerY;

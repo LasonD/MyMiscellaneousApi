@@ -1,17 +1,17 @@
-export function getRandomCoordinate(canvas) {
+export function getRandomCoordinate(canvas: HTMLCanvasElement) {
   const x = getRandomInt(0, canvas.width);
   const y = getRandomInt(0, canvas.height);
 
   return { x, y };
 }
 
-export function getRandomInt(min, max) {
+export function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export function getRandomArrayElement(arr) {
+export function getRandomArrayElement(arr: any[]) {
   const index = getRandomInt(0, arr.length);
 
   return arr[index];
